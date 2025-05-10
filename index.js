@@ -10,6 +10,18 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
 
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/", (req, res) => {
+	res.send("Hello World!");
+});
+
+app.listen(port, () => {
+	console.log(`Example app listening on port ${port}`);
+});
+
 let wins;
 let interval = 1000 * 60 * 30; // 30 minutes
 
