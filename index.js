@@ -23,7 +23,7 @@ fetch(
 	});
 
 function compliment() {
-	let win = wins[37];
+	let win = wins[Math.floor(Math.random(wins.length) * wins.length)];
 	openai.chat.completions
 		.create({
 			model: "gpt-4o-mini",
