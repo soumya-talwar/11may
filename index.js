@@ -23,7 +23,7 @@ app.listen(port, () => {
 });
 
 let wins;
-let interval = 1000 * 60;
+let interval = 1000 * 60 * 30;
 
 fetch(
 	"https://raw.githubusercontent.com/soumya-talwar/may11/refs/heads/main/data/wins.json"
