@@ -10,7 +10,20 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
 
+let wins;
+let interval = 1000 * 60; // 1 minute
+// let interval = 1000 * 60 * 30; // 30 minutes
+
+fetch(
+	"https://raw.githubusercontent.com/soumya-talwar/may11/refs/heads/main/data/wins.json"
+)
+	.then((response) => response.json())
+	.then((data) => {
+		wins = data.wins;
+	});
+
 function compliment() {
+	let win = wins[Math.floor(Math.random(wins.length) * wins.length)];
 	openai.chat.completions
 		.create({
 			model: "gpt-4o-mini",
@@ -18,36 +31,39 @@ function compliment() {
 			messages: [
 				{
 					role: "user",
-					content:
-						"give me a short compliment on my birthday about how i caught 2 fish in 10 seconds",
+					content: `give me a short birthday compliment about how ${win.text}`,
 				},
 			],
 		})
 		.then(async (output) => {
-			await client.messages.create({
-				body: output.choices[0].message.content,
-				from: "whatsapp:+14155238886",
-				mediaUrl:
-					"https://raw.githubusercontent.com/soumya-talwar/may11/refs/heads/main/data/images/fish.mp4",
-				to: `whatsapp:+91${process.env.PHONENUMBER}`,
-			});
+			let params;
+			if (win.image)
+				params = {
+					body: output.choices[0].message.content,
+					from: "whatsapp:+14155238886",
+					mediaUrl: `https://raw.githubusercontent.com/soumya-talwar/may11/refs/heads/main/data/images/${win.image}`,
+					to: `whatsapp:+91${process.env.PHONENUMBER}`,
+				};
+			else
+				params = {
+					body: output.choices[0].message.content,
+					from: "whatsapp:+14155238886",
+					to: `whatsapp:+91${process.env.PHONENUMBER}`,
+				};
+			await client.messages.create(params);
 			console.log("complimented!");
 			console.log("compliment: " + output.choices[0].message.content);
 		});
 }
 
-compliment();
-
-// let interval = 1000 * 3; // 3 seconds
-// // let interval = 1000 * 60 * 30; // 30 minutes
-
-// let birthday = setInterval(() => {
-// 	let date = new Date();
-// 	let day = date.getDate();
-// 	let month = date.getMonth() + 1;
-// 	if (day == 10 && month == 5) compliment();
-// 	else if (day == 12) {
-// 		console.log("shutting down!");
-// 		clearInterval(birthday);
-// 	}
-// }, interval);
+let start = setInterval(() => {
+	let date = new Date();
+	let day = date.getDate();
+	let month = date.getMonth() + 1;
+	if (day == 10 && month == 5) compliment(); // test
+	// if (day == 11 && month == 5) compliment();
+	else if (day == 12) {
+		console.log("shutting down!");
+		clearInterval(start);
+	}
+}, interval);
