@@ -11,7 +11,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
 
 let wins;
-let interval = 1000 * 60; // 1 minute
+let interval = 1000 * 5; // 1 minute
 // let interval = 1000 * 60 * 30; // 30 minutes
 
 fetch(
@@ -23,7 +23,8 @@ fetch(
 	});
 
 function compliment() {
-	let win = wins[Math.floor(Math.random(wins.length) * wins.length)];
+	let win = wins[wins.length - 1];
+	// let win = wins[Math.floor(Math.random(wins.length) * wins.length)];
 	openai.chat.completions
 		.create({
 			model: "gpt-4o-mini",
@@ -31,7 +32,9 @@ function compliment() {
 			messages: [
 				{
 					role: "user",
-					content: `give me a short birthday compliment about how ${win.text}`,
+					content: `Give me a ${
+						Math.random() < 0.5 ? "very" : ""
+					} short birthday compliment about how ${win.text}. Add an emoji too!`,
 				},
 			],
 		})
