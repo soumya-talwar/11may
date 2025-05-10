@@ -11,8 +11,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
 
 let wins;
-let interval = 1000 * 5; // 1 minute
-// let interval = 1000 * 60 * 30; // 30 minutes
+let interval = 1000 * 60 * 30; // 30 minutes
 
 fetch(
 	"https://raw.githubusercontent.com/soumya-talwar/may11/refs/heads/main/data/wins.json"
@@ -62,8 +61,7 @@ let start = setInterval(() => {
 	let date = new Date();
 	let day = date.getDate();
 	let month = date.getMonth() + 1;
-	if (day == 10 && month == 5) compliment(); // test
-	// if (day == 11 && month == 5) compliment();
+	if (day == 11 && month == 5) compliment();
 	else if (day == 12) {
 		console.log("shutting down!");
 		clearInterval(start);
