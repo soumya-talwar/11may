@@ -12,7 +12,7 @@ const client = twilio(accountSid, authToken);
 
 import express from "express";
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 10000;
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");
@@ -23,7 +23,7 @@ app.listen(port, () => {
 });
 
 let wins;
-let interval = 1000 * 15; // 15 seconds
+let interval = 1000 * 60;
 
 fetch(
 	"https://raw.githubusercontent.com/soumya-talwar/may11/refs/heads/main/data/wins.json"
