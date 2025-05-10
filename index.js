@@ -75,7 +75,7 @@ let start = setInterval(() => {
 	let date = new Date();
 	let day = date.getDate();
 	let month = date.getMonth() + 1;
-	if (day == 11 && month == 5) compliment();
+	if ((day == 11 || day == 10) && month == 5) compliment();
 	else if (day == 12) {
 		console.log("shutting down!");
 		clearInterval(start);
