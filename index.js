@@ -12,7 +12,7 @@ const client = twilio(accountSid, authToken);
 
 import express from "express";
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 4000;
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");
@@ -23,7 +23,7 @@ app.listen(port, () => {
 });
 
 let wins;
-let interval = 1000 * 60 * 30; // 30 minutes
+let interval = 1000 * 15; // 15 seconds
 
 fetch(
 	"https://raw.githubusercontent.com/soumya-talwar/may11/refs/heads/main/data/wins.json"
@@ -73,7 +73,7 @@ let start = setInterval(() => {
 	let date = new Date();
 	let day = date.getDate();
 	let month = date.getMonth() + 1;
-	if (day == 11 && month == 5) compliment();
+	if (day == 10 && month == 5) compliment();
 	else if (day == 12) {
 		console.log("shutting down!");
 		clearInterval(start);
