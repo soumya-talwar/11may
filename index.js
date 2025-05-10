@@ -44,7 +44,9 @@ function compliment() {
 					role: "user",
 					content: `Give me a ${
 						Math.random() < 0.5 ? "very" : ""
-					} short birthday compliment about how ${win.text}. Add an emoji too!`,
+					} short birthday compliment about how ${
+						win.text
+					}. Keep it fun & playful, and add an emoji`,
 				},
 			],
 		})
@@ -73,7 +75,7 @@ let start = setInterval(() => {
 	let date = new Date();
 	let day = date.getDate();
 	let month = date.getMonth() + 1;
-	if (day == 10 && month == 5) compliment();
+	if (day == 11 && month == 5) compliment();
 	else if (day == 12) {
 		console.log("shutting down!");
 		clearInterval(start);
