@@ -18,7 +18,8 @@ function compliment() {
 			messages: [
 				{
 					role: "user",
-					content: "give me a short compliment on my birthday",
+					content:
+						"give me a short compliment on my birthday about how i caught 2 fish in 10 seconds",
 				},
 			],
 		})
@@ -27,7 +28,7 @@ function compliment() {
 				body: output.choices[0].message.content,
 				from: "whatsapp:+14155238886",
 				mediaUrl:
-					"https://github.com/soumya-talwar/may11/blob/main/data/images/test.png",
+					"https://raw.githubusercontent.com/soumya-talwar/may11/refs/heads/main/data/images/fish.mp4",
 				to: `whatsapp:+91${process.env.PHONENUMBER}`,
 			});
 			console.log("complimented!");
@@ -35,16 +36,18 @@ function compliment() {
 		});
 }
 
-let interval = 1000 * 5; // 5 seconds
-// let interval = 1000 * 60 * 30; // 30 minutes
+compliment();
 
-let birthday = setInterval(() => {
-	let date = new Date();
-	let day = date.getDate();
-	let month = date.getMonth() + 1;
-	if (day == 10 && month == 5) compliment();
-	else if (day == 12) {
-		console.log("shutting down!");
-		clearInterval(birthday);
-	}
-}, interval);
+// let interval = 1000 * 3; // 3 seconds
+// // let interval = 1000 * 60 * 30; // 30 minutes
+
+// let birthday = setInterval(() => {
+// 	let date = new Date();
+// 	let day = date.getDate();
+// 	let month = date.getMonth() + 1;
+// 	if (day == 10 && month == 5) compliment();
+// 	else if (day == 12) {
+// 		console.log("shutting down!");
+// 		clearInterval(birthday);
+// 	}
+// }, interval);
