@@ -26,7 +26,8 @@ function compliment() {
 			await client.messages.create({
 				body: output.choices[0].message.content,
 				from: "whatsapp:+14155238886",
-				mediaUrl: "/data/images/test.png",
+				mediaUrl:
+					"https://github.com/soumya-talwar/may11/blob/main/data/images/test.png",
 				to: `whatsapp:+91${process.env.PHONENUMBER}`,
 			});
 			console.log("complimented!");
