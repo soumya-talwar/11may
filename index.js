@@ -42,7 +42,7 @@ function compliment() {
 				params = {
 					body: output.choices[0].message.content,
 					from: "whatsapp:+14155238886",
-					mediaUrl: `https://raw.githubusercontent.com/soumya-talwar/may11/refs/heads/main/data/images/${win.image}`,
+					mediaUrl: `https://github.com/soumya-talwar/host/blob/main/images/${win.image}`,
 					to: `whatsapp:+91${process.env.PHONE_NUMBER}`,
 				};
 			else
