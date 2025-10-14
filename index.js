@@ -10,17 +10,16 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
 
-let wins;
-let interval = 1000 * 60 * 60;
+import { readFile } from "fs/promises";
+const data = JSON.parse(
+	await readFile(new URL("./data/wins.json", import.meta.url))
+);
 
-fetch(
-	`https://raw.githubusercontent.com/soumya-talwar/host/refs/heads/main/wins.json?token=${process.env.GITHUB_TOKEN}`
-)
-	.then((response) => response.json())
-	.then((data) => (wins = data.wins));
+const interval = 1000 * 60 * 60;
 
 function compliment() {
-	let win = wins[Math.floor(Math.random(wins.length) * wins.length)];
+	let win =
+		data.wins[Math.floor(Math.random(data.wins.length) * data, wins.length)];
 	openai.chat.completions
 		.create({
 			model: "gpt-4o-mini",
@@ -42,7 +41,7 @@ function compliment() {
 				params = {
 					body: output.choices[0].message.content,
 					from: "whatsapp:+14155238886",
-					mediaUrl: `https://raw.githubusercontent.com/soumya-talwar/host/refs/heads/main/images/${win.image}?token=${process.env.GITHUB_TOKEN}`,
+					mediaUrl: win.image,
 					to: `whatsapp:+91${process.env.PHONE_NUMBER}`,
 				};
 			else
