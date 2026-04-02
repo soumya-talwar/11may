@@ -1,68 +1,85 @@
 import "dotenv/config";
 
 import OpenAI from "openai";
-const openai = new OpenAI({
-	apiKey: process.env.OPENAI_API_KEY,
-});
-
 import twilio from "twilio";
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = twilio(accountSid, authToken);
-
 import { readFile } from "fs/promises";
-const data = JSON.parse(
-	await readFile(new URL("./data/wins.json", import.meta.url))
-);
 
-const interval = 1000 * 60 * 60;
+const { OPENAI_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, PHONE_NUMBER } =
+	process.env;
 
-function compliment() {
-	let win =
-		data.wins[Math.floor(Math.random(data.wins.length) * data, wins.length)];
-	openai.chat.completions
-		.create({
-			model: "gpt-4o-mini",
-			store: true,
-			messages: [
-				{
-					role: "user",
-					content: `Give me a ${
-						Math.random() < 0.5 ? "very" : ""
-					} short birthday compliment about how ${
-						win.text
-					}. Keep it fun & playful, and add an emoji`,
-				},
-			],
-		})
-		.then(async (output) => {
-			let params;
-			if (win.image)
-				params = {
-					body: output.choices[0].message.content,
-					from: "whatsapp:+14155238886",
-					mediaUrl: win.image,
-					to: `whatsapp:+91${process.env.PHONE_NUMBER}`,
-				};
-			else
-				params = {
-					body: output.choices[0].message.content,
-					from: "whatsapp:+14155238886",
-					to: `whatsapp:+91${process.env.PHONE_NUMBER}`,
-				};
-			await client.messages.create(params);
-			console.log("complimented!");
-			console.log("compliment: " + output.choices[0].message.content);
-		});
+const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+const twilioClient = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+
+const WHATSAPP_FROM = "whatsapp:+14155238886";
+const WHATSAPP_TO = `whatsapp:+91${PHONE_NUMBER}`;
+const INTERVAL_MS = 1000 * 60 * 60;
+
+async function loadWins() {
+	const file = await readFile(new URL("./data/wins.json", import.meta.url));
+	return JSON.parse(file).wins;
 }
 
-let start = setInterval(() => {
-	let date = new Date();
-	let day = date.getDate();
-	let month = date.getMonth() + 1;
-	if (day == 11 && month == 5) compliment();
-	else if (day == 12) {
-		console.log("shutting down!");
-		clearInterval(start);
+function getRandomItem(arr) {
+	return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function isBirthday(date = new Date()) {
+	return date.getDate() === 11 && date.getMonth() === 4;
+}
+
+function isDayAfterBirthday(date = new Date()) {
+	return date.getDate() === 12 && date.getMonth() === 4;
+}
+
+async function generateCompliment(win) {
+	const intensity = Math.random() < 0.5 ? "very " : "";
+	const response = await openai.responses.create({
+		model: "gpt-4.1-mini",
+		input: `Give me a ${intensity}short birthday compliment about how ${win.text}. Keep it fun, playful, and include one emoji.`,
+	});
+	return response.output_text.trim();
+}
+
+async function sendWhatsAppMessage({ body, mediaUrl }) {
+	const message = {
+		body,
+		from: WHATSAPP_FROM,
+		to: WHATSAPP_TO,
+	};
+	if (mediaUrl) {
+		message.mediaUrl = [mediaUrl];
 	}
-}, interval);
+	await twilioClient.messages.create(message);
+}
+
+async function sendCompliment(wins) {
+	try {
+		const win = getRandomItem(wins);
+		const text = await generateCompliment(win);
+		await sendWhatsAppMessage({
+			body: text,
+			mediaUrl: win.image || null,
+		});
+		console.log("Compliment sent:", text);
+	} catch (error) {
+		console.error("Failed to send compliment:", error);
+	}
+}
+
+async function start() {
+	const wins = await loadWins();
+	console.log("Birthday bot started(!)");
+	const interval = setInterval(async () => {
+		const now = new Date();
+		if (isBirthday(now)) {
+			await sendCompliment(wins);
+		} else if (isDayAfterBirthday(now)) {
+			console.log("Birthday over. Shutting down :(");
+			clearInterval(interval);
+		} else {
+			console.log("Not birthday yet :(");
+		}
+	}, INTERVAL_MS);
+}
+
+start();
