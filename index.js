@@ -35,8 +35,7 @@ function getRandomItem(arr) {
 }
 
 function isBirthday(date = new Date()) {
-	// return date.getDate() === 11 && date.getMonth() === 4;
-	return true;
+	return date.getDate() === 11 && date.getMonth() === 4;
 }
 
 async function generateCompliment(win) {
