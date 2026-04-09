@@ -11,9 +11,9 @@
 	"author": "soumya talwar",
 	"license": "ISC",
 	"dependencies": {
+		"@google/genai": "^1.49.0",
 		"dotenv": "^16.5.0",
 		"express": "^5.1.0",
-		"openai": "^4.98.0",
 		"twilio": "^5.6.0"
 	}
 }

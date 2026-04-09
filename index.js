@@ -1,16 +1,15 @@
 import dotenv from "dotenv";
-
 dotenv.config();
 
-import OpenAI from "openai";
+import { GoogleGenAI } from "@google/genai";
 import twilio from "twilio";
 import { readFile } from "fs/promises";
 
-const { OPENAI_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, PHONE_NUMBER } =
+const { GEMINI_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, PHONE_NUMBER } =
 	process.env;
 
 if (
-	!OPENAI_API_KEY ||
+	!GEMINI_API_KEY ||
 	!TWILIO_ACCOUNT_SID ||
 	!TWILIO_AUTH_TOKEN ||
 	!PHONE_NUMBER
@@ -18,14 +17,16 @@ if (
 	throw new Error("Missing required environment variables");
 }
 
-const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
-const twilioClient = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+const ai = new GoogleGenAI({
+	apiKey: process.env.GEMINI_API_KEY,
+});
 
+const twilioClient = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 const WHATSAPP_FROM = "whatsapp:+14155238886";
 const WHATSAPP_TO = `whatsapp:+91${PHONE_NUMBER}`;
 
 async function loadWins() {
-	const file = await readFile(new URL("./data/wins.json", import.meta.url));
+	const file = await readFile(new URL("data/wins.json", import.meta.url));
 	return JSON.parse(file).wins;
 }
 
@@ -34,16 +35,26 @@ function getRandomItem(arr) {
 }
 
 function isBirthday(date = new Date()) {
-	return date.getDate() === 11 && date.getMonth() === 4;
+	// return date.getDate() === 11 && date.getMonth() === 4;
+	return true;
 }
 
 async function generateCompliment(win) {
 	const intensity = Math.random() < 0.5 ? "very " : "";
-	const response = await openai.responses.create({
-		model: "gpt-4.1-mini",
-		input: `Give me a ${intensity}short birthday compliment about how ${win.text}. Keep it fun, playful, and include one emoji.`,
+	const response = await ai.models.generateContent({
+		model: "gemini-2.5-flash-lite",
+		contents: [
+			{
+				role: "user",
+				parts: [
+					{
+						text: `Give me a ${intensity}short birthday compliment about how ${win.text}. Keep it fun, playful, and include one emoji.`,
+					},
+				],
+			},
+		],
 	});
-	return response.output_text.trim();
+	return response.text;
 }
 
 async function sendWhatsAppMessage({ body, mediaUrl }) {
