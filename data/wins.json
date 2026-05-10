@@ -1,174 +1,127 @@
 {
 	"wins": [
 		{
+			"text": "I've been coding since I was 12"
+		},
+		{
 			"text": "I learnt to code by myself"
 		},
 		{
-			"text": "I rebuilt my life during the pandemic without a job or a college degree",
-			"image": "newlife.jpeg"
+			"text": "I have a full head of hair"
 		},
 		{
-			"text": "I became a popular horror fanfiction writer on Twitter ",
-			"image": "author.jpeg"
+			"text": "I don't drink or smoke"
 		},
 		{
-			"text": "I got cancelled on Twitter but came out stronger & quit social media",
-			"image": "cancelled.jpeg"
+			"text": "I don't drink coffee"
 		},
 		{
-			"text": "I built the first of its kind queer fanfiction recommendation bot on Twitter",
-			"image": "taegificbot.jpeg"
+			"text": "I have all my teeth"
 		},
 		{
-			"text": "I built a talking husband out of a money plant called Jimin",
-			"image": "jimin.jpeg"
+			"text": "I moisturize"
 		},
 		{
-			"text": "I dated 13 men in a single month",
-			"image": "men.jpeg"
+			"text": "I sleep enough sometimes"
 		},
 		{
-			"text": "I endured 8 years of bullying in a boarding school (“Welham”) and came out stronger",
-			"image": "welham.jpeg"
+			"text": "I eat my vegetables"
 		},
 		{
-			"text": "I got my eyes (of over a negative 10) surgically corrected by myself",
-			"image": "eyes.jpeg"
+			"text": "I now have perfect vision (after having a power of -10 in both eyes)"
 		},
 		{
-			"text": "I more than doubled my first pay in 2 years",
-			"image": "pay.jpeg"
+			"text": "I have a job"
 		},
 		{
-			"text": "I bought a car",
-			"image": "car.jpeg"
+			"text": "I am a Senior Art Director"
 		},
 		{
-			"text": "I learnt how to drive a car by myself",
-			"image": "drive.jpeg"
+			"text": "I have friends"
 		},
 		{
-			"text": "I live in my apartment by myself and am independent & self-sufficient",
-			"image": "apartment.jpeg"
+			"text": "I actually enjoy talking to my parents"
 		},
 		{
-			"text": "I built a life-size cutout of Madara to sleep with me in my bed",
-			"image": "madara.jpeg"
+			"text": "I live alone"
 		},
 		{
-			"text": "I built an otome game to let men win a date with me",
-			"image": "otome1.jpeg"
+			"text": "I have my own house"
 		},
 		{
-			"text": "My otome game blew up on Github",
-			"image": "otome2.png"
+			"text": "I live in a house called the White House"
 		},
 		{
-			"text": "I went viral on Reddit",
-			"image": "reddit.jpeg"
+			"text": "I have lived by myself since I was 9"
 		},
 		{
-			"text": "A fan loved my story & made a free audiobook of it",
-			"image": "audiobook.jpeg"
+			"text": "I am unmarried at 29"
 		},
 		{
-			"text": "I built a Twitter bot to exist as me post my death",
-			"image": "death.jpeg"
+			"text": "I built a talking husband out of a money plant"
 		},
 		{
-			"text": "I live in the White House",
-			"image": "house.jpeg"
+			"text": "I dated 13 men in a single month"
 		},
 		{
-			"text": "I groped an old man when I was 4",
-			"image": "grope.jpeg"
+			"text": "I built a game where men can win a date with me"
 		},
 		{
-			"text": "I pushed a bully down the stairs in kindergarten",
-			"image": "kindergarten.jpeg"
+			"text": "A man tried to marry me when I was 4 but I beat him up"
 		},
 		{
-			"text": "I beat up the man who tried to marry me when I was 4"
+			"text": "I grabbed an old man's butt when I was 4"
 		},
 		{
-			"text": "I painted a road"
+			"text": "I sleep next to a life-size Madara cutout"
 		},
 		{
-			"text": "I painted a hilarious gay joke",
-			"image": "cock.jpeg"
+			"text": "I can drive"
 		},
 		{
-			"text": "I was invited at a talk show"
+			"text": "I can parallel park"
 		},
 		{
-			"text": "I successfully seduced all the men at a speed dating event",
-			"image": "speed.jpeg"
+			"text": "I can drive through Bangalore traffic"
 		},
 		{
-			"text": "I performed at an open mic",
-			"image": "openmic.jpeg"
+			"text": "My plants are still alive somehow"
 		},
 		{
-			"text": "I know all the countries and their capitals",
-			"image": "capitals.jpeg"
+			"text": "I jive"
 		},
 		{
-			"text": "I successfully recovered from my molestation trauma",
-			"image": "redd.jpeg"
+			"text": "I go to the gym"
 		},
 		{
-			"text": "I successfully recovered from my workplace trauma",
-			"image": "construkt.jpeg"
+			"text": "I drink 2l of water every day"
 		},
 		{
-			"text": "I flew an aircraft",
-			"image": "aircraft.jpeg"
+			"text": "I pushed a bully down the stairs in kindergarten"
 		},
 		{
-			"text": "I mentored a college student"
+			"text": "I once painted a road"
 		},
 		{
-			"text": "I volunteered to teach underprivileged children",
-			"image": "teach.jpeg"
+			"text": "I once flew an airplane"
 		},
 		{
-			"text": "I won a free resort stay at a pagade tournament ",
-			"image": "pagade.jpeg"
+			"text": "I caught 2 fish in 10 seconds"
 		},
 		{
-			"text": "I was hired without any relevant education or experience because my portfolio alone was able to imoress the hiring manager",
-			"image": "manish.jpeg"
+			"text": "I know all the countries and their capitals"
 		},
 		{
-			"text": "I got promoted to a Senior Art Director role at Target",
-			"image": "promotion.jpeg"
+			"text": "I won a ludo tournament"
 		},
 		{
-			"text": "I came out of a harassment episode by a coworker",
-			"image": "demoday.jpeg"
+			"text": "I am a popular horror fiction author online"
 		},
 		{
-			"text": "I built a voice-enabled shopping assistant for Target",
-			"image": "voice.jpeg"
+			"text": "I do 1000-piece jigsaw puzzles for fun"
 		},
 		{
-			"text": "I came in second place in a hackathon",
-			"image": "hackathon.jpeg"
-		},
-		{
-			"text": "I learnt to cook"
-		},
-		{
-			"text": "I successfully recovered from a severe skin condition",
-			"image": "skin.jpeg"
-		},
-		{
-			"text": "I finished several 1000 piece jigsaw puzzles",
-			"image": "jigsaw.jpeg"
-		},
-		{
-			"text": "I caught 2 fish in 10 seconds",
-			"image": "fish.jpeg"
+			"text": "I won a hackathon"
 		}
 	]
 }
