@@ -46,9 +46,10 @@ async function saveUsedWins(usedWins) {
 }
 
 function isBirthday(date = new Date()) {
-	return (
-		(date.getDate() === 10 || date.getDate() === 11) && date.getMonth() === 4
-	);
+	// return (
+	// 	(date.getDate() === 10 || date.getDate() === 11) && date.getMonth() === 4
+	// );
+	return true;
 }
 
 function getAvailableWins(wins, usedWins) {
