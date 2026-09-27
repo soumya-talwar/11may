@@ -1,67 +1,47 @@
-# 11-MAY — Whatsapp Birthday Bot
+# 11MAY
 
-11-May is an automation that sends me AI-generated WhatsApp compliments every hour on my birthday. 
+### A WhatsApp bot that compliments me every hour on my birthday
 
-It runs as a scheduled job that selects from a dataset of personal wins and generates a contextual message for each run.
+11may is a tiny birthday bot that sends me a new compliment every hour throughout my birthday.
 
-<br>
+The compliments are generated from a collection of real facts about me.
 
-## ✨ Features
+## How it works
 
-### 🎉 Scheduled Compliment Delivery
+Each time the script runs, it:
 
-Sends a message every hour on May 11.
+1. Checks whether it's my birthday.
+2. Loads the list of wins.
+3. Picks one that hasn't been used yet.
+4. Sends the win to **Gemini** with a prompt describing the tone of the compliment.
+5. Sends the generated message to me on **WhatsApp** using Twilio.
+6. Records the win as used so it doesn't repeat itself.
 
-* Runs on a cron schedule via GitHub Actions
-* No manual intervention once deployed
+```text
+Personal wins
+      │
+      ▼
+ Pick an unused win
+      │
+      ▼
+ Gemini generates a compliment
+      │
+      ▼
+ Twilio → WhatsApp
+      │
+      ▼
+ Mark win as used
+```
 
-### 🧠 AI-Generated Compliments
+If a win has an associated image, the bot sends that along with the compliment.
 
-Each message is dynamically generated using an LLM.
+## Example Output
 
-* Based on a selected personal win
-* Varies output across runs to avoid repetition
+> _“Happy birthday! 🎉 You have a functioning liver and a head full of hair. Some people genuinely dream of this life 🫡”_
 
-### 🧩 Personalized Data Layer
+## Built with
 
-Compliments are generated from a dataset of personal wins.
-
-* Each run selects one entry at random
-* Images are included if available for the selected win
-
-### 🔁 Stateless Execution
-
-Each run is independent and self-contained.
-
-* No persistent server required
-* No dependency on previous runs
-
-<br>
-
-## 🧱 Tech Stack
-
-* **Runtime:** Node.js
-* **Scheduling:** GitHub Actions (cron)
-* **AI:** Gemini API 
-* **Messaging:** Twilio WhatsApp API
-
-<br>
-
-## 🧠 How it Works
-
-1. A scheduled workflow triggers the system at defined intervals
-2. The script:
-   * Loads a dataset of personal wins
-   * Selects one at random
-3. The selected win is passed into an LLM
-4. The LLM generates a short compliment
-5. A message payload is constructed:
-   * Text (AI-generated)
-   * Optional media
-6. The message is sent via WhatsApp API
-
-<br>
-
-## 🧩 Example Output
-
-> *“Happy birthday! 🎉 You’ve been coding since you were 12 and somehow turned that into real, working systems? That’s not luck — that’s years of obsession paying off.”*
+- **Node.js**
+- **Google Gemini API**
+- **Twilio WhatsApp API**
+- **GitHub Actions**
